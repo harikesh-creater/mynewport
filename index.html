@@ -1,0 +1,2653 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harikesh Patel - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #111111;
+            --primary: #00ff88;
+            --secondary: #00ffff;
+            --accent: #ff00ff;
+            --text: #ffffff;
+            --text-muted: #888888;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background:
+                linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+
+        .gradient-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+            z-index: 1;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--primary);
+            top: -250px;
+            left: -250px;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent);
+            bottom: -200px;
+            right: -200px;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: var(--secondary);
+            top: 50%;
+            right: -150px;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(50px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-50px, 50px) scale(0.9);
+            }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+            padding: 1.5rem 2rem;
+            z-index: 1000;
+        }
+
+        nav .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::before {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+            flex-direction: column;
+            gap: 0;
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            padding: 1rem 2rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.05);
+            transition: all 0.3s;
+        }
+
+        .mobile-menu a:hover {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--primary);
+        }
+
+        main {
+            position: relative;
+            z-index: 10;
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 6rem 1.5rem 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradientShift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: var(--bg-dark);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid var(--primary);
+            display: inline-block;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .btn-secondary {
+            padding: 1rem 2rem;
+            background: transparent;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+            display: inline-block;
+            font-size: 0.95rem;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--secondary);
+            color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 500px;
+        }
+
+        .code-window {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: absolute;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: floatCode 4s ease-in-out infinite;
+        }
+
+        .window-1 {
+            top: 0;
+            left: 0;
+            width: 300px;
+        }
+
+        .window-2 {
+            top: 100px;
+            right: 0;
+            width: 280px;
+            animation-delay: -2s;
+        }
+
+        .window-3 {
+            bottom: 0;
+            left: 50px;
+            width: 320px;
+            animation-delay: -1s;
+        }
+
+        @keyframes floatCode {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .code-header {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .code-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red {
+            background: #ff5f56;
+        }
+
+        .dot-yellow {
+            background: #ffbd2e;
+        }
+
+        .dot-green {
+            background: #27c93f;
+        }
+
+        .code-line {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 0.4rem 0;
+        }
+
+        .code-keyword {
+            color: var(--accent);
+        }
+
+        .code-function {
+            color: var(--secondary);
+        }
+
+        .code-string {
+            color: var(--primary);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .about-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 255, 136, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .about-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.1);
+        }
+
+        .about-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .about-card p {
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .stat-box {
+            background: rgba(0, 255, 136, 0.05);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 0.8rem;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 255, 136, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .skill-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.2);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+            filter: grayscale(100%);
+            transition: filter 0.3s;
+        }
+
+        .skill-card:hover .skill-icon {
+            filter: grayscale(0%);
+        }
+
+        .skill-card h3 {
+            font-size: 1rem;
+            color: var(--text);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 255, 136, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 255, 136, 0.2);
+        }
+
+        .project-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--text);
+        }
+
+        .project-card p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: gap 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .project-link:hover {
+            gap: 1rem;
+        }
+
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .interest-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 255, 136, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .interest-card:hover {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .interest-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+
+        .interest-card:hover .interest-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .interest-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .interest-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 255, 136, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            border-color: var(--primary);
+            transform: translateX(10px);
+        }
+
+        .contact-icon {
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+
+        .contact-form {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 255, 136, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--bg-dark);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 0.9rem;
+            background: var(--primary);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            color: var(--primary);
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: var(--bg-dark);
+            border-color: var(--primary);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.4);
+        }
+
+        .social-link svg {
+            transition: transform 0.3s;
+            width: 35px;
+            height: 35px;
+        }
+
+        .social-link:hover svg {
+            transform: rotate(10deg);
+        }
+
+        h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .game-btn-floating {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.5);
+            transition: all 0.3s;
+            z-index: 1000;
+            color: var(--bg-dark);
+        }
+
+        .game-btn-floating:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.7);
+        }
+
+        .game-card {
+            background: #111111;
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.3);
+        }
+
+        #chessBoard {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 0;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .chess-square {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .chess-square.light {
+            background: #f0d9b5;
+        }
+
+        .chess-square.dark {
+            background: #b58863;
+        }
+
+        .chess-square.selected {
+            background: #7fc97f !important;
+            box-shadow: inset 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        .chess-square.valid-move {
+            background: #9fd99f !important;
+            position: relative;
+        }
+
+        .chess-square.valid-move::after {
+            content: '';
+            position: absolute;
+            width: 30%;
+            height: 30%;
+            background: rgba(0, 255, 136, 0.6);
+            border-radius: 50%;
+        }
+
+        .chess-square.check {
+            background: #ff6b6b !important;
+            animation: checkPulse 1s infinite;
+        }
+
+        @keyframes checkPulse {
+            0%, 100% {
+                box-shadow: inset 0 0 20px rgba(255, 0, 0, 0.5);
+            }
+            50% {
+                box-shadow: inset 0 0 40px rgba(255, 0, 0, 0.8);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .about-grid,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            section {
+                padding: 5rem 1.5rem 3rem;
+                min-height: auto;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-text p {
+                font-size: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                text-align: center;
+                padding: 0.9rem 1.5rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .skill-card {
+                padding: 1.2rem;
+            }
+
+            .skill-icon {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .interests-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-card {
+                padding: 1.5rem;
+            }
+
+            .about-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .contact-form {
+                padding: 1.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .code-window {
+                display: none;
+            }
+
+            .game-btn-floating {
+                width: 55px;
+                height: 55px;
+                bottom: 1.5rem;
+                right: 1.5rem;
+                font-size: 1.5rem;
+            }
+
+            .chess-square {
+                font-size: 1.8rem;
+            }
+
+            #gameCanvas {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 0.8rem 1rem;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            section {
+                padding: 4rem 1rem 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .section-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+
+            .skill-card {
+                padding: 1rem;
+            }
+
+            .skill-icon {
+                font-size: 1.8rem;
+            }
+
+            .skill-card h3 {
+                font-size: 0.85rem;
+            }
+
+            .chess-square {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grid-bg"></div>
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+
+    <nav>
+        <div class="nav-content">
+            <div class="logo">HP</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#interests">Interests</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#interests">Interests</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+    <main>
+        <section id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>Hi, I'm <span class="gradient-text">Harikesh Patel</span></h1>
+                        <p>Full Stack Developer crafting digital experiences with modern technologies. Specializing in
+                            web development and AI integration.</p>
+                        <div class="cta-buttons">
+                            <a href="#projects" class="btn-primary">View Projects</a>
+                            <a href="#contact" class="btn-secondary">Get In Touch</a>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="code-window window-1">
+                            <div class="code-header">
+                                <div class="code-dot dot-red"></div>
+                                <div class="code-dot dot-yellow"></div>
+                                <div class="code-dot dot-green"></div>
+                            </div>
+                            <div class="code-line"><span class="code-keyword">const</span> <span
+                                    class="code-function">developer</span> = {</div>
+                            <div class="code-line"> name: <span class="code-string">"Harikesh"</span>,</div>
+                            <div class="code-line"> skills: <span class="code-string">"Full Stack"</span></div>
+                            <div class="code-line">};</div>
+                        </div>
+                        <div class="code-window window-2">
+                            <div class="code-header">
+                                <div class="code-dot dot-red"></div>
+                                <div class="code-dot dot-yellow"></div>
+                                <div class="code-dot dot-green"></div>
+                            </div>
+                            <div class="code-line"><span class="code-keyword">import</span> React <span
+                                    class="code-keyword">from</span> <span class="code-string">'react'</span>;</div>
+                            <div class="code-line"><span class="code-keyword">export</span> <span
+                                    class="code-function">App</span>();</div>
+                        </div>
+                        <div class="code-window window-3">
+                            <div class="code-header">
+                                <div class="code-dot dot-red"></div>
+                                <div class="code-dot dot-yellow"></div>
+                                <div class="code-dot dot-green"></div>
+                            </div>
+                            <div class="code-line"><span class="code-function">console</span>.<span
+                                    class="code-keyword">log</span>(<span class="code-string">"Building amazing
+                                    things"</span>);</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About <span class="gradient-text">Me</span></h2>
+                <p class="section-subtitle">Get to know more about my journey and achievements</p>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <h3>🎓 Education Journey</h3>
+                        <p><strong>Bachelor of Technology - Computer Science</strong></p>
+                        <p>Chandubhai S Patel Institute of Technology</p>
+                        <p>CHARUSAT University, Ahmedabad</p>
+                        <p style="margin-top: 1rem; color: var(--text);">Currently in 3rd Semester, maintaining strong
+                            academic performance with hands-on project experience.</p>
+
+                        <div class="stat-box">
+                            <div class="stat-label">1st Semester CGPA</div>
+                            <div class="stat-value">7.8</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">2nd Semester CGPA</div>
+                            <div class="stat-value">7.0</div>
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>12th Grade - Science Stream</strong></p>
+                        <p>Bright Junior Science College</p>
+                        <div class="stat-box">
+                            <div class="stat-label">Percentage</div>
+                            <div class="stat-value">90.66%</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="about-card">
+                            <h3>📍 Location</h3>
+                            <p><strong>F-401, Samyak Galaxy</strong></p>
+                            <p>Near Uma Bhavani Railway Crossing</p>
+                            <p>Godrej Garden City</p>
+                            <p>Ahmedabad, Gujarat</p>
+                        </div>
+
+                        <div class="about-card" style="margin-top: 2rem;">
+                            <h3>💡 About</h3>
+                            <p>Passionate about creating innovative web solutions and exploring the intersection of AI
+                                and web development. Always eager to learn new technologies and build impactful
+                                projects.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="container">
+                <h2>Technical <span class="gradient-text">Skills</span></h2>
+                <p class="section-subtitle">Technologies and tools I work with</p>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-icon">🌐</div>
+                        <h3>HTML5</h3>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">🎨</div>
+                        <h3>CSS3</h3>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">⚡</div>
+                        <h3>JavaScript</h3>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">🟢</div>
+                        <h3>Node.js</h3>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">🗄️</div>
+                        <h3>DBMS</h3>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">💻</div>
+                        <h3>C</h3>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">⚙️</div>
+                        <h3>C++</h3>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">☕</div>
+                        <h3>Java</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <h2>Featured <span class="gradient-text">Projects</span></h2>
+                <p class="section-subtitle">Some of my recent work</p>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-icon">🎯</div>
+                        <h3>Career Guidance AI</h3>
+                        <p>An intelligent AI-powered platform that helps students and professionals make informed career
+                            decisions. Analyzes skills, interests, and market trends to provide personalized career
+                            recommendations and learning paths.</p>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-icon">🧬</div>
+                        <h3>Graphy Gene & AI</h3>
+                        <p>A cutting-edge application combining graph theory and artificial intelligence to visualize
+                            genetic data. Features interactive graphs, data analysis tools, and machine learning
+                            algorithms for genetic research and education.</p>
+                        <a href="https://graphy-2025.streamlit.app/" target="_blank" class="project-link">View Project
+                            →</a>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-icon">⚡</div>
+                        <h3>Power Feedback System</h3>
+                        <p>A real-time feedback management system designed to collect, analyze, and respond to user
+                            feedback efficiently. Includes analytics dashboard, automated responses, and sentiment
+                            analysis for improved satisfaction.</p>
+                        <a href="https://ssip-project-4360b.firebaseapp.com/" target="_blank" class="project-link">View
+                            Project →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="interests">
+            <div class="container">
+                <h2>Interests & <span class="gradient-text">Hobbies</span></h2>
+                <p class="section-subtitle">What I enjoy beyond coding</p>
+                <div class="interests-grid">
+                    <div class="interest-card">
+                        <div class="interest-icon">🏏</div>
+                        <h3>Cricket</h3>
+                        <p>Passionate about playing and watching cricket matches. Love the strategic elements of the
+                            game.</p>
+                    </div>
+
+                    <div class="interest-card">
+                        <div class="interest-icon">🏐</div>
+                        <h3>Volleyball</h3>
+                        <p>Enjoy team sports and the competitive spirit of volleyball games.</p>
+                    </div>
+
+                    <div class="interest-card">
+                        <div class="interest-icon">♟️</div>
+                        <h3>Chess</h3>
+                        <p>Strategic thinking and mental challenges through the game of chess.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Get In <span class="gradient-text">Touch</span></h2>
+                <p class="section-subtitle">Let's work together on your next project</p>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>Let's Connect</h3>
+                        <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of
+                            your vision.</p>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div>
+                                <div class="stat-label">Email</div>
+                                <div>harikeshpatel0105@gmail.com</div>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <div class="stat-label">Location</div>
+                                <div>Ahmedabad, Gujarat</div>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">🎓</div>
+                            <div>
+                                <div class="stat-label">University</div>
+                                <div>CHARUSAT University</div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 2rem;">
+                            <h4 style="color: var(--text-muted); margin-bottom: 1rem;">Connect With Me</h4>
+                            <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                                <a href="https://www.instagram.com/harikesh_patel_05/" target="_blank"
+                                    class="social-link" title="Instagram">
+                                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor"
+                                            stroke-width="2" />
+                                        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" />
+                                        <circle cx="18" cy="6" r="1" fill="currentColor" />
+                                    </svg>
+                                </a>
+
+                                <a href="https://www.linkedin.com/in/harikesh-patel-059b0331a/" target="_blank"
+                                    class="social-link" title="LinkedIn">
+                                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M20 3H4C3.4 3 3 3.4 3 4V20C3 20.6 3.4 21 4 21H20C20.6 21 21 20.6 21 20V4C21 3.4 20.6 3 20 3ZM8.5 18.3H5.7V10H8.5V18.3ZM7.1 8.7C6.2 8.7 5.5 8 5.5 7.1C5.5 6.2 6.2 5.5 7.1 5.5C8 5.5 8.7 6.2 8.7 7.1C8.7 8 8 8.7 7.1 8.7ZM18.3 18.3H15.5V14.2C15.5 13.2 15.5 11.9 14.1 11.9C12.7 11.9 12.5 13 12.5 14.1V18.3H9.7V10H12.4V11.1H12.4C12.8 10.4 13.7 9.7 15 9.7C17.8 9.7 18.3 11.5 18.3 13.8V18.3Z"
+                                            fill="currentColor" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" name="name" placeholder="Your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" name="email" placeholder="your.email@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Message</label>
+                                <textarea name="message" rows="5" placeholder="Your message..." required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="game-btn-floating" id="gameButton">🎮</button>
+
+    <div id="gameMenuModal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 10000; backdrop-filter: blur(10px); overflow-y: auto;">
+        <div style="position: absolute; top: 20px; right: 30px; font-size: 2rem; color: #00ff88; cursor: pointer; z-index: 10001;"
+            onclick="closeGameMenu()">✕</div>
+        <div
+            style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 4rem 1.5rem 2rem;">
+            <h2 style="color: #00ff88; margin-bottom: 2rem; font-size: 2.5rem; text-align: center;">🎮 Choose Your Game
+            </h2>
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1200px; width: 100%;">
+                <div class="game-card" onclick="openGameWindow('space')">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">🚀</div>
+                    <h3 style="color: #00ff88; margin-bottom: 0.5rem;">Space Shooter</h3>
+                    <p style="color: #888888;">Destroy enemies and survive!</p>
+                </div>
+
+                <div class="game-card" onclick="openGameWindow('snake')" style="border-color: rgba(0, 255, 255, 0.3);">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">🐍</div>
+                    <h3 style="color: #00ffff; margin-bottom: 0.5rem;">Classic Snake</h3>
+                    <p style="color: #888888;">Eat food and grow longer!</p>
+                </div>
+
+                <div class="game-card" onclick="openGameWindow('brick')" style="border-color: rgba(255, 0, 255, 0.3);">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">🧱</div>
+                    <h3 style="color: #ff00ff; margin-bottom: 0.5rem;">Brick Breaker</h3>
+                    <p style="color: #888888;">Break all the bricks!</p>
+                </div>
+
+                <div class="game-card" onclick="openGameWindow('chess')" style="border-color: rgba(255, 215, 0, 0.3);">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">♟️</div>
+                    <h3 style="color: #ffd700; margin-bottom: 0.5rem;">Chess</h3>
+                    <p style="color: #888888;">Strategic battle of minds!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="gameModal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 10000; backdrop-filter: blur(10px); overflow-y: auto;">
+    </div>
+
+    <script>
+        let gameCanvas, gameCtx, gameRunning = false;
+        let currentGame = '';
+        let keys = {};
+        let animationId;
+        let player, bullets, enemies, particles, score, lives;
+        let snake, food, snakeDirection, snakeScore;
+        let paddle, ball, bricks, brickScore, brickLives;
+        
+        let chessBoard = [];
+        let selectedPiece = null;
+        let currentPlayer = 'white';
+        let validMoves = [];
+        let chessGameMode = 'multiplayer';
+        let computerDifficulty = 'medium';
+        let isComputerThinking = false;
+        let moveHistory = [];
+        let whiteKingMoved = false;
+        let blackKingMoved = false;
+        let whiteRooksMoved = { left: false, right: false };
+        let blackRooksMoved = { left: false, right: false };
+
+        const chessPieces = {
+            white: {
+                king: '♔', queen: '♕', rook: '♖', 
+                bishop: '♗', knight: '♘', pawn: '♙'
+            },
+            black: {
+                king: '♚', queen: '♛', rook: '♜', 
+                bishop: '♝', knight: '♞', pawn: '♟'
+            }
+        };
+
+        let touchStartX = 0, touchStartY = 0;
+        let isTouchDevice = 'ontouchstart' in window;
+
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        function openGameMenu() {
+            document.getElementById('gameMenuModal').style.display = 'block';
+        }
+
+        function closeGameMenu() {
+            document.getElementById('gameMenuModal').style.display = 'none';
+        }
+
+        function backToGameMenu() {
+            closeGameModal();
+            openGameMenu();
+        }
+
+        function openGameWindow(gameType) {
+            currentGame = gameType;
+            closeGameMenu();
+            
+            if (gameType === 'chess') {
+                showChessSetup();
+            } else {
+                createGameModal();
+                document.getElementById('gameCanvas').style.display = 'block';
+                document.getElementById('chessBoard').style.display = 'none';
+                gameCanvas = document.getElementById('gameCanvas');
+                gameCtx = gameCanvas.getContext('2d');
+
+                if (gameType === 'space') {
+                    document.getElementById('gameTitle').textContent = '🚀 Space Shooter';
+                    document.getElementById('gameInstructions').textContent = isTouchDevice ? 
+                        'Touch and drag to move, tap to shoot!' : 'Use Arrow Keys to move, SPACE to shoot!';
+                    initSpaceShooter();
+                } else if (gameType === 'snake') {
+                    document.getElementById('gameTitle').textContent = '🐍 Classic Snake';
+                    document.getElementById('gameInstructions').textContent = isTouchDevice ?
+                        'Swipe to control the snake!' : 'Use Arrow Keys to control the snake!';
+                    initSnake();
+                } else if (gameType === 'brick') {
+                    document.getElementById('gameTitle').textContent = '🧱 Brick Breaker';
+                    document.getElementById('gameInstructions').textContent = isTouchDevice ?
+                        'Touch to move paddle!' : 'Use Arrow Keys or Mouse to move paddle!';
+                    initBrickBreaker();
+                }
+            }
+        }
+
+        function createGameModal() {
+            document.getElementById('gameModal').innerHTML = `
+                <div style="position: absolute; top: 20px; left: 30px; font-size: 1.5rem; color: #00ff88; cursor: pointer; z-index: 10001;" onclick="backToGameMenu()">← Back</div>
+                <div style="position: absolute; top: 20px; right: 30px; font-size: 2rem; color: #00ff88; cursor: pointer; z-index: 10001;" onclick="closeGameModal()">✕</div>
+                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 5rem 1.5rem 2rem;">
+                    <h2 id="gameTitle" style="color: #00ff88; margin-bottom: 1rem; font-size: 2rem;"></h2>
+                    <p id="gameInstructions" style="color: #888888; margin-bottom: 1.5rem; font-size: 0.95rem; text-align: center;"></p>
+                    
+                    <canvas id="gameCanvas" width="800" height="600" style="border: 2px solid #00ff88; border-radius: 10px; background: #000; max-width: 100%; height: auto; display: block;"></canvas>
+                    
+                    <div id="chessBoard" style="display: none;"></div>
+                    
+                    <div id="gameStats" style="margin-top: 1rem; font-size: 1.2rem; color: #00ff88; text-align: center;"></div>
+
+                    <button onclick="restartCurrentGame()" id="mainRestartBtn" style="margin-top: 1.5rem; padding: 0.75rem 2rem; background: #00ff88; color: #0a0a0a; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 1rem;">Restart Game</button>
+                </div>
+            `;
+            document.getElementById('gameModal').style.display = 'block';
+        }
+
+        function closeGameModal() {
+            document.getElementById('gameModal').style.display = 'none';
+            gameRunning = false;
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+            }
+        }
+
+        function showChessSetup() {
+            const setupHTML = `
+                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 2rem;">
+                    <h2 style="color: #ffd700; margin-bottom: 2rem; font-size: 2.5rem;">♟️ Chess Setup</h2>
+                    
+                    <div style="background: #111; border: 2px solid rgba(255, 215, 0, 0.3); border-radius: 16px; padding: 2rem; max-width: 500px; width: 100%;">
+                        <h3 style="color: #00ff88; margin-bottom: 1.5rem;">Select Game Mode</h3>
+                        
+                        <div onclick="selectChessMode('multiplayer')" style="background: rgba(0, 255, 136, 0.1); border: 2px solid rgba(0, 255, 136, 0.3); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.borderColor='#00ff88'" onmouseout="this.style.borderColor='rgba(0, 255, 136, 0.3)'">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">👥</div>
+                            <h4 style="color: #00ff88; margin-bottom: 0.5rem;">Multiplayer</h4>
+                            <p style="color: #888; font-size: 0.9rem;">Play with a friend on the same device</p>
+                        </div>
+                        
+                        <div onclick="selectChessMode('computer')" style="background: rgba(0, 255, 255, 0.1); border: 2px solid rgba(0, 255, 255, 0.3); border-radius: 12px; padding: 1.5rem; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.borderColor='#00ffff'" onmouseout="this.style.borderColor='rgba(0, 255, 255, 0.3)'">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🤖</div>
+                            <h4 style="color: #00ffff; margin-bottom: 0.5rem;">vs Computer</h4>
+                            <p style="color: #888; font-size: 0.9rem;">Play against AI opponent</p>
+                        </div>
+                    </div>
+                    
+                    <button onclick="backToGameMenu()" style="margin-top: 2rem; padding: 0.75rem 2rem; background: transparent; color: #888; border: 2px solid #444; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 1rem;">← Back to Games</button>
+                </div>
+            `;
+            
+            document.getElementById('gameModal').innerHTML = `
+                <div style="position: absolute; top: 20px; right: 30px; font-size: 2rem; color: #00ff88; cursor: pointer; z-index: 10001;" onclick="closeGameModal()">✕</div>
+                ${setupHTML}
+            `;
+            document.getElementById('gameModal').style.display = 'block';
+        }
+
+        function selectChessMode(mode) {
+            chessGameMode = mode;
+            if (mode === 'computer') {
+                showDifficultySelection();
+            } else {
+                startChessGame();
+            }
+        }
+
+        function showDifficultySelection() {
+            const difficultyHTML = `
+                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 2rem;">
+                    <h2 style="color: #ffd700; margin-bottom: 2rem; font-size: 2.5rem;">♟️ Select Difficulty</h2>
+                    
+                    <div style="background: #111; border: 2px solid rgba(255, 215, 0, 0.3); border-radius: 16px; padding: 2rem; max-width: 500px; width: 100%;">
+                        <div onclick="selectDifficulty('easy')" style="background: rgba(0, 255, 136, 0.1); border: 2px solid rgba(0, 255, 136, 0.3); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.borderColor='#00ff88'" onmouseout="this.style.borderColor='rgba(0, 255, 136, 0.3)'">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🟢</div>
+                            <h4 style="color: #00ff88; margin-bottom: 0.5rem;">Easy</h4>
+                            <p style="color: #888; font-size: 0.9rem;">Random moves - Perfect for beginners</p>
+                        </div>
+                        
+                        <div onclick="selectDifficulty('medium')" style="background: rgba(255, 255, 0, 0.1); border: 2px solid rgba(255, 255, 0, 0.3); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.borderColor='#ffff00'" onmouseout="this.style.borderColor='rgba(255, 255, 0, 0.3)'">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🟡</div>
+                            <h4 style="color: #ffff00; margin-bottom: 0.5rem;">Medium</h4>
+                            <p style="color: #888; font-size: 0.9rem;">Strategic moves - Good challenge</p>
+                        </div>
+                        
+                        <div onclick="selectDifficulty('hard')" style="background: rgba(255, 0, 0, 0.1); border: 2px solid rgba(255, 0, 0, 0.3); border-radius: 12px; padding: 1.5rem; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.borderColor='#ff0000'" onmouseout="this.style.borderColor='rgba(255, 0, 0, 0.3)'">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔴</div>
+                            <h4 style="color: #ff0000; margin-bottom: 0.5rem;">Hard</h4>
+                            <p style="color: #888; font-size: 0.9rem;">Best moves - For experienced players</p>
+                        </div>
+                    </div>
+                    
+                    <button onclick="showChessSetup()" style="margin-top: 2rem; padding: 0.75rem 2rem; background: transparent; color: #888; border: 2px solid #444; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 1rem;">← Back</button>
+                </div>
+            `;
+            
+            document.getElementById('gameModal').innerHTML = `
+                <div style="position: absolute; top: 20px; right: 30px; font-size: 2rem; color: #00ff88; cursor: pointer; z-index: 10001;" onclick="closeGameModal()">✕</div>
+                ${difficultyHTML}
+            `;
+        }
+
+        function selectDifficulty(difficulty) {
+            computerDifficulty = difficulty;
+            startChessGame();
+        }
+
+        function startChessGame() {
+            document.getElementById('gameModal').innerHTML = `
+                <div style="position: absolute; top: 20px; left: 30px; font-size: 1.5rem; color: #00ff88; cursor: pointer; z-index: 10001;" onclick="showChessSetup()">← Back</div>
+                <div style="position: absolute; top: 20px; right: 30px; font-size: 2rem; color: #00ff88; cursor: pointer; z-index: 10001;" onclick="closeGameModal()">✕</div>
+                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 5rem 1.5rem 2rem;">
+                    <h2 id="gameTitle" style="color: #00ff88; margin-bottom: 1rem; font-size: 2rem;"></h2>
+                    <p id="gameInstructions" style="color: #888888; margin-bottom: 1.5rem; font-size: 0.95rem; text-align: center;"></p>
+                    
+                    <canvas id="gameCanvas" width="800" height="600" style="border: 2px solid #00ff88; border-radius: 10px; background: #000; max-width: 100%; height: auto; display: none;"></canvas>
+                    
+                    <div id="chessBoard" style="display: none;"></div>
+                    
+                    <div id="gameStats" style="margin-top: 1rem; font-size: 1.2rem; color: #00ff88; text-align: center;"></div>
+
+                    <button onclick="restartCurrentGame()" id="mainRestartBtn" style="margin-top: 1.5rem; padding: 0.75rem 2rem; background: #00ff88; color: #0a0a0a; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 1rem;">Restart Game</button>
+                </div>
+            `;
+            
+            document.getElementById('gameCanvas').style.display = 'none';
+            document.getElementById('chessBoard').style.display = 'grid';
+            document.getElementById('gameTitle').textContent = '♟️ Chess Game';
+            document.getElementById('gameInstructions').textContent = chessGameMode === 'multiplayer' 
+                ? 'Multiplayer Mode - Click pieces to move. White moves first!' 
+                : `Playing vs Computer (${computerDifficulty.toUpperCase()}) - You are White`;
+            initChess();
+        }
+
+        function initChess() {
+            chessBoard = [];
+            selectedPiece = null;
+            validMoves = [];
+            currentPlayer = 'white';
+            moveHistory = [];
+            whiteKingMoved = false;
+            blackKingMoved = false;
+            whiteRooksMoved = { left: false, right: false };
+            blackRooksMoved = { left: false, right: false };
+            isComputerThinking = false;
+            
+            for (let row = 0; row < 8; row++) {
+                chessBoard[row] = [];
+                for (let col = 0; col < 8; col++) {
+                    chessBoard[row][col] = null;
+                }
+            }
+
+            const setupPieces = ['rook', 'knight', 'bishop', 'queen', 'king', 'bishop', 'knight', 'rook'];
+            
+            for (let col = 0; col < 8; col++) {
+                chessBoard[0][col] = { type: setupPieces[col], color: 'black' };
+                chessBoard[1][col] = { type: 'pawn', color: 'black' };
+                chessBoard[6][col] = { type: 'pawn', color: 'white' };
+                chessBoard[7][col] = { type: setupPieces[col], color: 'white' };
+            }
+
+            renderChessBoard();
+            updateGameStats();
+        }
+
+        function renderChessBoard() {
+            const boardElement = document.getElementById('chessBoard');
+            boardElement.innerHTML = '';
+
+            const kingPos = findKing(currentPlayer);
+            const inCheck = kingPos && isSquareUnderAttack(kingPos.row, kingPos.col, currentPlayer);
+
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const square = document.createElement('div');
+                    square.className = 'chess-square ' + ((row + col) % 2 === 0 ? 'light' : 'dark');
+                    square.dataset.row = row;
+                    square.dataset.col = col;
+
+                    const piece = chessBoard[row][col];
+                    if (piece) {
+                        square.textContent = chessPieces[piece.color][piece.type];
+                        square.style.color = piece.color === 'white' ? '#fff' : '#000';
+                        
+                        if (piece.type === 'king' && piece.color === currentPlayer && inCheck) {
+                            square.classList.add('check');
+                        }
+                    }
+
+                    if (selectedPiece && selectedPiece.row === row && selectedPiece.col === col) {
+                        square.classList.add('selected');
+                    }
+
+                    if (validMoves.some(move => move.row === row && move.col === col)) {
+                        square.classList.add('valid-move');
+                    }
+
+                    square.addEventListener('click', () => handleChessSquareClick(row, col));
+                    boardElement.appendChild(square);
+                }
+            }
+        }
+
+        function handleChessSquareClick(row, col) {
+            if (isComputerThinking) return;
+            if (chessGameMode === 'computer' && currentPlayer === 'black') return;
+
+            const piece = chessBoard[row][col];
+
+            if (selectedPiece) {
+                const validMove = validMoves.find(move => move.row === row && move.col === col);
+                if (validMove) {
+                    makeMove(selectedPiece.row, selectedPiece.col, row, col);
+                    selectedPiece = null;
+                    validMoves = [];
+                    
+                    currentPlayer = currentPlayer === 'white' ? 'black' : 'white';
+                    
+                    renderChessBoard();
+                    
+                    if (isCheckmate(currentPlayer)) {
+                        setTimeout(() => {
+                            alert(`Checkmate! ${currentPlayer === 'white' ? 'Black' : 'White'} wins! 🏆`);
+                        }, 100);
+                        return;
+                    }
+                    
+                    if (isStalemate(currentPlayer)) {
+                        setTimeout(() => {
+                            alert('Stalemate! Game is a draw. 🤝');
+                        }, 100);
+                        return;
+                    }
+                    
+                    updateGameStats();
+                    
+                    if (chessGameMode === 'computer' && currentPlayer === 'black') {
+                        setTimeout(makeComputerMove, 500);
+                    }
+                } else if (piece && piece.color === currentPlayer) {
+                    selectedPiece = { row, col };
+                    validMoves = getAllValidMoves(row, col);
+                    renderChessBoard();
+                } else {
+                    selectedPiece = null;
+                    validMoves = [];
+                    renderChessBoard();
+                }
+            } else if (piece && piece.color === currentPlayer) {
+                selectedPiece = { row, col };
+                validMoves = getAllValidMoves(row, col);
+                renderChessBoard();
+            }
+        }
+
+        function getAllValidMoves(fromRow, fromCol) {
+            const piece = chessBoard[fromRow][fromCol];
+            if (!piece) return [];
+
+            const moves = [];
+
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    if (isValidMove(fromRow, fromCol, row, col)) {
+                        const tempBoard = JSON.parse(JSON.stringify(chessBoard));
+                        simulateMove(fromRow, fromCol, row, col, tempBoard);
+                        if (!isKingInCheck(piece.color, tempBoard)) {
+                            moves.push({ row, col });
+                        }
+                    }
+                }
+            }
+
+            return moves;
+        }
+
+        function makeMove(fromRow, fromCol, toRow, toCol) {
+            const piece = chessBoard[fromRow][fromCol];
+            
+            if (piece.type === 'king') {
+                if (piece.color === 'white') whiteKingMoved = true;
+                else blackKingMoved = true;
+                
+                if (Math.abs(toCol - fromCol) === 2) {
+                    if (toCol === 6) {
+                        chessBoard[toRow][5] = chessBoard[toRow][7];
+                        chessBoard[toRow][7] = null;
+                    } else if (toCol === 2) {
+                        chessBoard[toRow][3] = chessBoard[toRow][0];
+                        chessBoard[toRow][0] = null;
+                    }
+                }
+            }
+            
+            if (piece.type === 'rook') {
+                if (piece.color === 'white') {
+                    if (fromCol === 0) whiteRooksMoved.left = true;
+                    if (fromCol === 7) whiteRooksMoved.right = true;
+                } else {
+                    if (fromCol === 0) blackRooksMoved.left = true;
+                    if (fromCol === 7) blackRooksMoved.right = true;
+                }
+            }
+            
+            if (piece.type === 'pawn' && Math.abs(toRow - fromRow) === 2) {
+                piece.enPassant = true;
+            }
+            
+            if (piece.type === 'pawn' && fromCol !== toCol && !chessBoard[toRow][toCol]) {
+                chessBoard[fromRow][toCol] = null;
+            }
+            
+            if (piece.type === 'pawn' && (toRow === 0 || toRow === 7)) {
+                piece.type = 'queen';
+            }
+
+            chessBoard[toRow][toCol] = piece;
+            chessBoard[fromRow][fromCol] = null;
+            
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    if (chessBoard[row][col] && chessBoard[row][col].enPassant) {
+                        if (!(row === toRow && col === toCol)) {
+                            delete chessBoard[row][col].enPassant;
+                        }
+                    }
+                }
+            }
+            
+            moveHistory.push({ from: { row: fromRow, col: fromCol }, to: { row: toRow, col: toCol } });
+        }
+
+        function simulateMove(fromRow, fromCol, toRow, toCol, board) {
+            board[toRow][toCol] = board[fromRow][fromCol];
+            board[fromRow][fromCol] = null;
+        }
+
+        function isValidMove(fromRow, fromCol, toRow, toCol) {
+            const piece = chessBoard[fromRow][fromCol];
+            const target = chessBoard[toRow][toCol];
+
+            if (!piece) return false;
+            if (fromRow === toRow && fromCol === toCol) return false;
+            if (target && target.color === piece.color) return false;
+
+            const rowDiff = Math.abs(toRow - fromRow);
+            const colDiff = Math.abs(toCol - fromCol);
+
+            switch (piece.type) {
+                case 'pawn':
+                    const direction = piece.color === 'white' ? -1 : 1;
+                    const startRow = piece.color === 'white' ? 6 : 1;
+                    
+                    if (colDiff === 0) {
+                        if (toRow === fromRow + direction && !target) return true;
+                        if (fromRow === startRow && toRow === fromRow + 2 * direction && 
+                            !target && !chessBoard[fromRow + direction][fromCol]) return true;
+                    }
+                    
+                    if (colDiff === 1 && toRow === fromRow + direction) {
+                        if (target) return true;
+                        const adjacentPiece = chessBoard[fromRow][toCol];
+                        if (adjacentPiece && adjacentPiece.type === 'pawn' && 
+                            adjacentPiece.color !== piece.color && adjacentPiece.enPassant) {
+                            return true;
+                        }
+                    }
+                    return false;
+
+                case 'rook':
+                    if (rowDiff === 0 || colDiff === 0) {
+                        return isPathClear(fromRow, fromCol, toRow, toCol);
+                    }
+                    return false;
+
+                case 'knight':
+                    return (rowDiff === 2 && colDiff === 1) || (rowDiff === 1 && colDiff === 2);
+
+                case 'bishop':
+                    if (rowDiff === colDiff) {
+                        return isPathClear(fromRow, fromCol, toRow, toCol);
+                    }
+                    return false;
+
+                case 'queen':
+                    if (rowDiff === colDiff || rowDiff === 0 || colDiff === 0) {
+                        return isPathClear(fromRow, fromCol, toRow, toCol);
+                    }
+                    return false;
+
+                case 'king':
+                    if (rowDiff <= 1 && colDiff <= 1) return true;
+                    
+                    if (colDiff === 2 && rowDiff === 0) {
+                        if (piece.color === 'white' && !whiteKingMoved && fromRow === 7) {
+                            if (toCol === 6 && !whiteRooksMoved.right && 
+                                !chessBoard[7][5] && !chessBoard[7][6] &&
+                                chessBoard[7][7] && chessBoard[7][7].type === 'rook') {
+                                return !isSquareUnderAttack(7, 4, 'white') && 
+                                       !isSquareUnderAttack(7, 5, 'white') && 
+                                       !isSquareUnderAttack(7, 6, 'white');
+                            }
+                            if (toCol === 2 && !whiteRooksMoved.left && 
+                                !chessBoard[7][1] && !chessBoard[7][2] && !chessBoard[7][3] &&
+                                chessBoard[7][0] && chessBoard[7][0].type === 'rook') {
+                                return !isSquareUnderAttack(7, 4, 'white') && 
+                                       !isSquareUnderAttack(7, 3, 'white') && 
+                                       !isSquareUnderAttack(7, 2, 'white');
+                            }
+                        }
+                        if (piece.color === 'black' && !blackKingMoved && fromRow === 0) {
+                            if (toCol === 6 && !blackRooksMoved.right && 
+                                !chessBoard[0][5] && !chessBoard[0][6] &&
+                                chessBoard[0][7] && chessBoard[0][7].type === 'rook') {
+                                return !isSquareUnderAttack(0, 4, 'black') && 
+                                       !isSquareUnderAttack(0, 5, 'black') && 
+                                       !isSquareUnderAttack(0, 6, 'black');
+                            }
+                            if (toCol === 2 && !blackRooksMoved.left && 
+                                !chessBoard[0][1] && !chessBoard[0][2] && !chessBoard[0][3] &&
+                                chessBoard[0][0] && chessBoard[0][0].type === 'rook') {
+                                return !isSquareUnderAttack(0, 4, 'black') && 
+                                       !isSquareUnderAttack(0, 3, 'black') && 
+                                       !isSquareUnderAttack(0, 2, 'black');
+                            }
+                        }
+                    }
+                    return false;
+
+                default:
+                    return false;
+            }
+        }
+
+        function isPathClear(fromRow, fromCol, toRow, toCol) {
+            const rowStep = toRow > fromRow ? 1 : toRow < fromRow ? -1 : 0;
+            const colStep = toCol > fromCol ? 1 : toCol < fromCol ? -1 : 0;
+
+            let currentRow = fromRow + rowStep;
+            let currentCol = fromCol + colStep;
+
+            while (currentRow !== toRow || currentCol !== toCol) {
+                if (chessBoard[currentRow][currentCol] !== null) {
+                    return false;
+                }
+                currentRow += rowStep;
+                currentCol += colStep;
+            }
+
+            return true;
+        }
+
+        function isSquareUnderAttack(row, col, color, board = chessBoard) {
+            const opponent = color === 'white' ? 'black' : 'white';
+            
+            for (let r = 0; r < 8; r++) {
+                for (let c = 0; c < 8; c++) {
+                    const piece = board[r][c];
+                    if (piece && piece.color === opponent) {
+                        if (piece.type === 'pawn') {
+                            const direction = opponent === 'white' ? -1 : 1;
+                            if (row === r + direction && Math.abs(col - c) === 1) {
+                                return true;
+                            }
+                        } else if (canPieceAttack(r, c, row, col, board)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        function canPieceAttack(fromRow, fromCol, toRow, toCol, board) {
+            const piece = board[fromRow][fromCol];
+            if (!piece) return false;
+
+            const rowDiff = Math.abs(toRow - fromRow);
+            const colDiff = Math.abs(toCol - fromCol);
+
+            switch (piece.type) {
+                case 'rook':
+                    return (rowDiff === 0 || colDiff === 0) && isPathClearOnBoard(fromRow, fromCol, toRow, toCol, board);
+                case 'knight':
+                    return (rowDiff === 2 && colDiff === 1) || (rowDiff === 1 && colDiff === 2);
+                case 'bishop':
+                    return rowDiff === colDiff && isPathClearOnBoard(fromRow, fromCol, toRow, toCol, board);
+                case 'queen':
+                    return (rowDiff === colDiff || rowDiff === 0 || colDiff === 0) && 
+                           isPathClearOnBoard(fromRow, fromCol, toRow, toCol, board);
+                case 'king':
+                    return rowDiff <= 1 && colDiff <= 1;
+                default:
+                    return false;
+            }
+        }
+
+        function isPathClearOnBoard(fromRow, fromCol, toRow, toCol, board) {
+            const rowStep = toRow > fromRow ? 1 : toRow < fromRow ? -1 : 0;
+            const colStep = toCol > fromCol ? 1 : toCol < fromCol ? -1 : 0;
+
+            let currentRow = fromRow + rowStep;
+            let currentCol = fromCol + colStep;
+
+            while (currentRow !== toRow || currentCol !== toCol) {
+                if (board[currentRow][currentCol] !== null) {
+                    return false;
+                }
+                currentRow += rowStep;
+                currentCol += colStep;
+            }
+
+            return true;
+        }
+
+        function findKing(color) {
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const piece = chessBoard[row][col];
+                    if (piece && piece.type === 'king' && piece.color === color) {
+                        return { row, col };
+                    }
+                }
+            }
+            return null;
+        }
+
+        function isKingInCheck(color, board) {
+            const kingPos = findKingOnBoard(color, board);
+            if (!kingPos) return false;
+            return isSquareUnderAttack(kingPos.row, kingPos.col, color, board);
+        }
+
+        function findKingOnBoard(color, board) {
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const piece = board[row][col];
+                    if (piece && piece.type === 'king' && piece.color === color) {
+                        return { row, col };
+                    }
+                }
+            }
+            return null;
+        }
+
+        function isCheckmate(color) {
+            if (!isKingInCheck(color, chessBoard)) return false;
+            
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const piece = chessBoard[row][col];
+                    if (piece && piece.color === color) {
+                        const moves = getAllValidMoves(row, col);
+                        if (moves.length > 0) return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        function isStalemate(color) {
+            if (isKingInCheck(color, chessBoard)) return false;
+            
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const piece = chessBoard[row][col];
+                    if (piece && piece.color === color) {
+                        const moves = getAllValidMoves(row, col);
+                        if (moves.length > 0) return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        function makeComputerMove() {
+            isComputerThinking = true;
+            updateGameStats();
+            
+            const allMoves = [];
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const piece = chessBoard[row][col];
+                    if (piece && piece.color === 'black') {
+                        const moves = getAllValidMoves(row, col);
+                        moves.forEach(move => {
+                            allMoves.push({ from: { row, col }, to: move });
+                        });
+                    }
+                }
+            }
+
+            if (allMoves.length === 0) {
+                isComputerThinking = false;
+                return;
+            }
+
+            let bestMove;
+            if (computerDifficulty === 'easy') {
+                bestMove = allMoves[Math.floor(Math.random() * allMoves.length)];
+            } else if (computerDifficulty === 'medium') {
+                bestMove = allMoves.reduce((best, move) => {
+                    const score = evaluateMove(move);
+                    const bestScore = evaluateMove(best);
+                    return score > bestScore ? move : best;
+                });
+            } else {
+                bestMove = allMoves.reduce((best, move) => {
+                    const score = evaluateMoveDeep(move);
+                    const bestScore = evaluateMoveDeep(best);
+                    return score > bestScore ? move : best;
+                });
+            }
+
+            makeMove(bestMove.from.row, bestMove.from.col, bestMove.to.row, bestMove.to.col);
+            
+            currentPlayer = 'white';
+            isComputerThinking = false;
+            
+            renderChessBoard();
+            
+            if (isCheckmate(currentPlayer)) {
+                setTimeout(() => {
+                    alert('Checkmate! Black (Computer) wins! 🤖');
+                }, 100);
+                return;
+            }
+            
+            if (isStalemate(currentPlayer)) {
+                setTimeout(() => {
+                    alert('Stalemate! Game is a draw. 🤝');
+                }, 100);
+                return;
+            }
+            
+            updateGameStats();
+        }
+
+        function evaluateMove(move) {
+            const pieceValues = { pawn: 1, knight: 3, bishop: 3, rook: 5, queen: 9, king: 0 };
+            const target = chessBoard[move.to.row][move.to.col];
+            let score = target ? pieceValues[target.type] : 0;
+            
+            if (move.to.row >= 3 && move.to.row <= 4 && move.to.col >= 3 && move.to.col <= 4) {
+                score += 0.5;
+            }
+            
+            return score + Math.random() * 0.1;
+        }
+
+        function evaluateMoveDeep(move) {
+            let score = evaluateMove(move);
+            
+            const tempBoard = JSON.parse(JSON.stringify(chessBoard));
+            simulateMove(move.from.row, move.from.col, move.to.row, move.to.col, tempBoard);
+            
+            if (isKingInCheck('white', tempBoard)) {
+                score += 3;
+            }
+            
+            return score;
+        }
+
+        function initSpaceShooter() {
+            player = { x: 375, y: 520, width: 50, height: 50, speed: 7 };
+            bullets = [];
+            enemies = [];
+            particles = [];
+            score = 0;
+            lives = 3;
+            gameRunning = true;
+            updateGameStats();
+
+            setInterval(() => {
+                if (gameRunning && currentGame === 'space' && enemies.length < 8) {
+                    enemies.push({
+                        x: Math.random() * 760,
+                        y: -40,
+                        width: 40,
+                        height: 40,
+                        speed: 2 + Math.random() * 2
+                    });
+                }
+            }, 1500);
+
+            setupMobileControls();
+            gameLoopSpace();
+        }
+
+        function gameLoopSpace() {
+            if (!gameRunning || currentGame !== 'space') return;
+
+            gameCtx.fillStyle = '#000';
+            gameCtx.fillRect(0, 0, 800, 600);
+
+            for (let i = 0; i < 50; i++) {
+                gameCtx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+                gameCtx.fillRect(Math.random() * 800, (Date.now() * 0.05 + i * 20) % 600, 2, 2);
+            }
+
+            if (keys['ArrowLeft'] && player.x > 0) player.x -= player.speed;
+            if (keys['ArrowRight'] && player.x < 750) player.x += player.speed;
+            if (keys['ArrowUp'] && player.y > 0) player.y -= player.speed;
+            if (keys['ArrowDown'] && player.y < 550) player.y += player.speed;
+
+            gameCtx.fillStyle = '#00ff88';
+            gameCtx.beginPath();
+            gameCtx.moveTo(player.x + 25, player.y);
+            gameCtx.lineTo(player.x, player.y + 50);
+            gameCtx.lineTo(player.x + 25, player.y + 35);
+            gameCtx.lineTo(player.x + 50, player.y + 50);
+            gameCtx.closePath();
+            gameCtx.fill();
+
+            gameCtx.fillStyle = '#00ffff';
+            gameCtx.fillRect(player.x + 15, player.y + 45, 8, 10);
+            gameCtx.fillRect(player.x + 27, player.y + 45, 8, 10);
+
+            bullets.forEach((bullet, index) => {
+                bullet.y -= bullet.speed;
+                gameCtx.fillStyle = '#00ffff';
+                gameCtx.shadowBlur = 10;
+                gameCtx.shadowColor = '#00ffff';
+                gameCtx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+                gameCtx.shadowBlur = 0;
+                if (bullet.y < 0) bullets.splice(index, 1);
+            });
+
+            enemies.forEach((enemy, eIndex) => {
+                enemy.y += enemy.speed;
+                gameCtx.fillStyle = '#ff00ff';
+                gameCtx.shadowBlur = 15;
+                gameCtx.shadowColor = '#ff00ff';
+                gameCtx.beginPath();
+                gameCtx.arc(enemy.x + 20, enemy.y + 20, 20, 0, Math.PI * 2);
+                gameCtx.fill();
+                gameCtx.shadowBlur = 0;
+
+                bullets.forEach((bullet, bIndex) => {
+                    if (bullet.x < enemy.x + 40 && bullet.x + 6 > enemy.x &&
+                        bullet.y < enemy.y + 40 && bullet.y + 20 > enemy.y) {
+                        for (let i = 0; i < 10; i++) {
+                            particles.push({
+                                x: enemy.x + 20,
+                                y: enemy.y + 20,
+                                vx: (Math.random() - 0.5) * 6,
+                                vy: (Math.random() - 0.5) * 6,
+                                life: 30
+                            });
+                        }
+                        enemies.splice(eIndex, 1);
+                        bullets.splice(bIndex, 1);
+                        score += 10;
+                        updateGameStats();
+                    }
+                });
+
+                if (player.x < enemy.x + 40 && player.x + 50 > enemy.x &&
+                    player.y < enemy.y + 40 && player.y + 50 > enemy.y) {
+                    enemies.splice(eIndex, 1);
+                    lives--;
+                    updateGameStats();
+                    if (lives <= 0) {
+                        gameRunning = false;
+                        alert('Game Over! Final Score: ' + score);
+                    }
+                }
+
+                if (enemy.y > 600) enemies.splice(eIndex, 1);
+            });
+
+            particles.forEach((particle, index) => {
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+                particle.life--;
+                gameCtx.fillStyle = '#ff00ff';
+                gameCtx.globalAlpha = particle.life / 30;
+                gameCtx.fillRect(particle.x, particle.y, 3, 3);
+                gameCtx.globalAlpha = 1;
+                if (particle.life <= 0) particles.splice(index, 1);
+            });
+
+            animationId = requestAnimationFrame(gameLoopSpace);
+        }
+
+        function initSnake() {
+            snake = [{ x: 10, y: 10 }];
+            food = { x: 15, y: 15 };
+            snakeDirection = { x: 1, y: 0 };
+            snakeScore = 0;
+            gameRunning = true;
+            updateGameStats();
+            setupMobileControls();
+            gameLoopSnake();
+        }
+
+        function gameLoopSnake() {
+            if (!gameRunning || currentGame !== 'snake') return;
+
+            setTimeout(() => {
+                gameCtx.fillStyle = '#000';
+                gameCtx.fillRect(0, 0, 800, 600);
+
+                gameCtx.strokeStyle = 'rgba(0, 255, 136, 0.1)';
+                for (let i = 0; i < 40; i++) {
+                    gameCtx.strokeRect(i * 20, 0, 20, 600);
+                    gameCtx.strokeRect(0, i * 20, 800, 20);
+                }
+
+                const head = { x: snake[0].x + snakeDirection.x, y: snake[0].y + snakeDirection.y };
+
+                if (head.x < 0 || head.x >= 40 || head.y < 0 || head.y >= 30) {
+                    gameRunning = false;
+                    alert('Game Over! Score: ' + snakeScore);
+                    return;
+                }
+
+                for (let segment of snake) {
+                    if (head.x === segment.x && head.y === segment.y) {
+                        gameRunning = false;
+                        alert('Game Over! Score: ' + snakeScore);
+                        return;
+                    }
+                }
+
+                snake.unshift(head);
+
+                if (head.x === food.x && head.y === food.y) {
+                    snakeScore += 10;
+                    updateGameStats();
+                    food = { x: Math.floor(Math.random() * 40), y: Math.floor(Math.random() * 30) };
+                } else {
+                    snake.pop();
+                }
+
+                snake.forEach((segment, index) => {
+                    gameCtx.fillStyle = index === 0 ? '#00ff88' : '#00ffaa';
+                    gameCtx.shadowBlur = 10;
+                    gameCtx.shadowColor = '#00ff88';
+                    gameCtx.fillRect(segment.x * 20 + 1, segment.y * 20 + 1, 18, 18);
+                    gameCtx.shadowBlur = 0;
+                });
+
+                gameCtx.fillStyle = '#ff00ff';
+                gameCtx.shadowBlur = 15;
+                gameCtx.shadowColor = '#ff00ff';
+                gameCtx.beginPath();
+                gameCtx.arc(food.x * 20 + 10, food.y * 20 + 10, 8, 0, Math.PI * 2);
+                gameCtx.fill();
+                gameCtx.shadowBlur = 0;
+
+                gameLoopSnake();
+            }, 100);
+        }
+
+        function initBrickBreaker() {
+            paddle = { x: 340, y: 570, width: 120, height: 15, speed: 10 };
+            ball = { x: 400, y: 300, radius: 8, dx: 4, dy: -4 };
+            bricks = [];
+
+            for (let row = 0; row < 5; row++) {
+                for (let col = 0; col < 10; col++) {
+                    bricks.push({
+                        x: col * 80 + 5,
+                        y: row * 30 + 50,
+                        width: 75,
+                        height: 25,
+                        alive: true,
+                        color: ['#00ff88', '#00ffff', '#ff00ff', '#ffff00', '#ff0088'][row]
+                    });
+                }
+            }
+
+            brickScore = 0;
+            brickLives = 3;
+            gameRunning = true;
+            updateGameStats();
+            setupMobileControls();
+            gameLoopBrick();
+        }
+
+        function gameLoopBrick() {
+            if (!gameRunning || currentGame !== 'brick') return;
+
+            gameCtx.fillStyle = '#000';
+            gameCtx.fillRect(0, 0, 800, 600);
+
+            if (keys['ArrowLeft'] && paddle.x > 0) paddle.x -= paddle.speed;
+            if (keys['ArrowRight'] && paddle.x < 680) paddle.x += paddle.speed;
+
+            gameCtx.fillStyle = '#00ff88';
+            gameCtx.shadowBlur = 15;
+            gameCtx.shadowColor = '#00ff88';
+            gameCtx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
+            gameCtx.shadowBlur = 0;
+
+            ball.x += ball.dx;
+            ball.y += ball.dy;
+
+            if (ball.x + ball.radius > 800 || ball.x - ball.radius < 0) ball.dx = -ball.dx;
+            if (ball.y - ball.radius < 0) ball.dy = -ball.dy;
+
+            if (ball.y + ball.radius > paddle.y && ball.x > paddle.x && ball.x < paddle.x + paddle.width) {
+                ball.dy = -ball.dy;
+                ball.dx += (ball.x - (paddle.x + 60)) * 0.1;
+            }
+
+            if (ball.y + ball.radius > 600) {
+                brickLives--;
+                updateGameStats();
+                if (brickLives <= 0) {
+                    gameRunning = false;
+                    alert('Game Over! Score: ' + brickScore);
+                    return;
+                }
+                ball.x = 400;
+                ball.y = 300;
+                ball.dx = 4;
+                ball.dy = -4;
+            }
+
+            gameCtx.fillStyle = '#00ffff';
+            gameCtx.shadowBlur = 15;
+            gameCtx.shadowColor = '#00ffff';
+            gameCtx.beginPath();
+            gameCtx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+            gameCtx.fill();
+            gameCtx.shadowBlur = 0;
+
+            bricks.forEach(brick => {
+                if (brick.alive) {
+                    gameCtx.fillStyle = brick.color;
+                    gameCtx.shadowBlur = 10;
+                    gameCtx.shadowColor = brick.color;
+                    gameCtx.fillRect(brick.x, brick.y, brick.width, brick.height);
+                    gameCtx.shadowBlur = 0;
+
+                    if (ball.x + ball.radius > brick.x && ball.x - ball.radius < brick.x + brick.width &&
+                        ball.y + ball.radius > brick.y && ball.y - ball.radius < brick.y + brick.height) {
+                        ball.dy = -ball.dy;
+                        brick.alive = false;
+                        brickScore += 10;
+                        updateGameStats();
+                    }
+                }
+            });
+
+            if (bricks.every(brick => !brick.alive)) {
+                gameRunning = false;
+                alert('You Win! Score: ' + brickScore);
+                return;
+            }
+
+            animationId = requestAnimationFrame(gameLoopBrick);
+        }
+
+        function setupMobileControls() {
+            if (!isTouchDevice) return;
+
+            const canvas = document.getElementById('gameCanvas');
+            if (!canvas) return;
+            
+            canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+            canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+            canvas.addEventListener('touchend', handleTouchEnd, { passive: false });
+        }
+
+        function handleTouchStart(e) {
+            e.preventDefault();
+            if (!gameCanvas) return;
+            const touch = e.touches[0];
+            const rect = gameCanvas.getBoundingClientRect();
+            touchStartX = touch.clientX - rect.left;
+            touchStartY = touch.clientY - rect.top;
+
+            if (currentGame === 'space') {
+                shootBullet();
+            }
+        }
+
+        function handleTouchMove(e) {
+            e.preventDefault();
+            if (!gameCanvas) return;
+            const touch = e.touches[0];
+            const rect = gameCanvas.getBoundingClientRect();
+            const touchX = touch.clientX - rect.left;
+            const touchY = touch.clientY - rect.top;
+
+            if (currentGame === 'space') {
+                const scaleX = 800 / rect.width;
+                const scaleY = 600 / rect.height;
+                player.x = touchX * scaleX - player.width / 2;
+                player.y = touchY * scaleY - player.height / 2;
+                player.x = Math.max(0, Math.min(750, player.x));
+                player.y = Math.max(0, Math.min(550, player.y));
+            } else if (currentGame === 'brick') {
+                const scaleX = 800 / rect.width;
+                paddle.x = touchX * scaleX - paddle.width / 2;
+                paddle.x = Math.max(0, Math.min(680, paddle.x));
+            }
+        }
+
+        function handleTouchEnd(e) {
+            e.preventDefault();
+            if (!gameCanvas) return;
+            const touch = e.changedTouches[0];
+            const rect = gameCanvas.getBoundingClientRect();
+            const touchEndX = touch.clientX - rect.left;
+            const touchEndY = touch.clientY - rect.top;
+
+            if (currentGame === 'snake') {
+                const deltaX = touchEndX - touchStartX;
+                const deltaY = touchEndY - touchStartY;
+
+                if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                    if (deltaX > 30 && snakeDirection.x === 0) {
+                        snakeDirection = { x: 1, y: 0 };
+                    } else if (deltaX < -30 && snakeDirection.x === 0) {
+                        snakeDirection = { x: -1, y: 0 };
+                    }
+                } else {
+                    if (deltaY > 30 && snakeDirection.y === 0) {
+                        snakeDirection = { x: 0, y: 1 };
+                    } else if (deltaY < -30 && snakeDirection.y === 0) {
+                        snakeDirection = { x: 0, y: -1 };
+                    }
+                }
+            }
+        }
+
+        function shootBullet() {
+            if (gameRunning && currentGame === 'space') {
+                bullets.push({ x: player.x + 22, y: player.y, width: 6, height: 20, speed: 10 });
+            }
+        }
+
+        function updateGameStats() {
+            if (currentGame === 'space') {
+                document.getElementById('gameStats').innerHTML = `Score: ${score} | Lives: ${lives}`;
+            } else if (currentGame === 'snake') {
+                document.getElementById('gameStats').innerHTML = `Score: ${snakeScore}`;
+            } else if (currentGame === 'brick') {
+                document.getElementById('gameStats').innerHTML = `Score: ${brickScore} | Lives: ${brickLives}`;
+            } else if (currentGame === 'chess') {
+                const statusText = isComputerThinking ? 'Computer is thinking...' : `Current Turn: ${currentPlayer.toUpperCase()}`;
+                const kingPos = findKing(currentPlayer);
+                const inCheck = kingPos && isSquareUnderAttack(kingPos.row, kingPos.col, currentPlayer);
+                document.getElementById('gameStats').innerHTML = statusText + (inCheck ? ' <span style="color: #ff6b6b;">⚠️ CHECK!</span>' : '');
+            }
+        }
+
+        function restartCurrentGame() {
+            if (animationId) cancelAnimationFrame(animationId);
+            if (currentGame === 'chess') {
+                startChessGame();
+            } else {
+                openGameWindow(currentGame);
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            keys[e.key] = true;
+            if (currentGame === 'space' && e.key === ' ') {
+                e.preventDefault();
+                shootBullet();
+            }
+            if (currentGame === 'snake' && !keys['processing']) {
+                keys['processing'] = true;
+                if (e.key === 'ArrowUp' && snakeDirection.y === 0) snakeDirection = { x: 0, y: -1 };
+                if (e.key === 'ArrowDown' && snakeDirection.y === 0) snakeDirection = { x: 0, y: 1 };
+                if (e.key === 'ArrowLeft' && snakeDirection.x === 0) snakeDirection = { x: -1, y: 0 };
+                if (e.key === 'ArrowRight' && snakeDirection.x === 0) snakeDirection = { x: 1, y: 0 };
+                setTimeout(() => keys['processing'] = false, 100);
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            keys[e.key] = false;
+        });
+
+        window.addEventListener('load', () => {
+            const canvasElement = document.getElementById('gameCanvas');
+            if (canvasElement) {
+                canvasElement.addEventListener('mousemove', (e) => {
+                    if (currentGame === 'brick' && gameRunning) {
+                        const rect = canvasElement.getBoundingClientRect();
+                        const scaleX = 800 / rect.width;
+                        paddle.x = (e.clientX - rect.left) * scaleX - paddle.width / 2;
+                        paddle.x = Math.max(0, Math.min(680, paddle.x));
+                    }
+                });
+            }
+        });
+
+        document.getElementById('gameButton').addEventListener('click', openGameMenu);
+
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.about-card, .skill-card, .project-card, .interest-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.color = 'var(--text-muted)';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.color = 'var(--primary)';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
