@@ -1403,7 +1403,81 @@
         style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 10000; backdrop-filter: blur(10px); overflow-y: auto;">
     </div>
 
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
     <script>
+         const firebaseConfig = {
+            apiKey: "AIzaSyCakUVkQtUNIPxdVBLDWHNB_kznSsbokzM",
+            authDomain: "harikesh-portfolio-7b8b2.firebaseapp.com",
+            projectId: "harikesh-portfolio-7b8b2",
+            storageBucket: "harikesh-portfolio-7b8b2.firebasestorage.app",
+            messagingSenderId: "723820823962",
+            appId: "1:723820823962:web:6668531dc644b9b1a12623",
+            measurementId: "G-4E45500NE8"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        
+        console.log('✅ Firebase Initialized Successfully!');
+
+        // ✅ Notification Function
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 4000);
+        }
+
+        // ✅ Contact Form Handler with Firebase
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', async function (e) {
+                    e.preventDefault();
+
+                    const submitBtn = this.querySelector('.submit-btn');
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Sending...';
+
+                    const formData = {
+                        name: this.name.value,
+                        email: this.email.value,
+                        message: this.message.value,
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                        date: new Date().toLocaleString('en-IN', {
+                            timeZone: 'Asia/Kolkata',
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        })
+                    };
+
+                    try {
+                        await db.collection('messages').add(formData);
+                        showNotification('Message sent successfully! આભાર! 🎉', 'success');
+                        this.reset();
+                        console.log('✅ Message saved to Firebase!');
+                    } catch (error) {
+                        console.error('❌ Firebase Error:', error);
+                        showNotification('Error sending message. Please try again.', 'error');
+                    } finally {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Send Message';
+                    }
+                });
+            }
+        });
+
         let gameCanvas, gameCtx, gameRunning = false;
         let currentGame = '';
         let keys = {};
